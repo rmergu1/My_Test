@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    stages {
+        stage ('Pull Python Image and Create new Image') {
+            steps {
+                sh '''
+                  echo "Pulling Docker Image"
+                  docker images
+                 '''
+            }
+        }
+         stage('Running the script') {
+             steps {
+                 withCredentials([usernamePassword(credentialsId: 'Jfrog-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                 sh '''
+                     echo "Listing old artifacts"
+                     docker run -it mycustomeimage:1.0 --sourcerepo sourcerepo --user $USERNAME --password $PASSWORD --minversion $minversion --maxversion $maxversion
+                 '''
+             }
+         }
+     }
+}
+}
