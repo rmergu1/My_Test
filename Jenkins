@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh '''
                   echo "Pulling Docker Image"
-                  docker images
+                  sudo docker images
                  '''
             }
         }
@@ -15,7 +15,7 @@ pipeline {
                  withCredentials([usernamePassword(credentialsId: 'Jfrog-creds', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                  sh '''
                      echo "Listing old artifacts"
-                     docker run -it mycustomeimage:1.0 --sourcerepo $sourcerepo --user $USERNAME --password $PASSWORD --minversion $minversion --maxversion $maxversion
+                     sudo docker run -it mycustomeimage:1.0 --sourcerepo $sourcerepo --user $USERNAME --password $PASSWORD --minversion $minversion --maxversion $maxversion
                  '''
              }
          }
