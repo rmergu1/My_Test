@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.inputs.repo_1 == 'true'
     steps:
-      - run: echo "some repo 1 job"
+      - run: echo "some test"
   
   repo-2-job:
     name: Repo 2 Job
